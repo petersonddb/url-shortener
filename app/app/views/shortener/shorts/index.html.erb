@@ -2,14 +2,14 @@
 <hr>
 <h2><%= t(".title") %> </h2>
 
-<div id="shorts">
+<div id="shorts" data-controller="shortener--shorts">
   <section id="new"><%= render "form", short_form: @short_form %></section>
 
   <section id="list">
     <table>
       <thead>
       <tr>
-        <th><%= Shortener::Short.human_attribute_name("token").capitalize %></th>
+        <th><%= Shortener::Short.model_name.human.capitalize %></th>
         <th><%= Shortener::Short.human_attribute_name("original_url").capitalize %></th>
         <th><%= Shortener::Short.human_attribute_name("expire_at").capitalize %></th>
         <th><%= t(".actions.title") %></th>
@@ -18,9 +18,9 @@
       <tbody>
       <% @shorts.each do |short| %>
         <tr>
-          <td><%= short.token %></td>
+          <td><%= link_to nil, short_link_redirection_url(short.token), target: "_blank" %></td>
           <td><%= short.original_url %></td>
-          <td><%= short.expire_at %></td>
+          <td><time data-shortener--shorts-target="expireAt" datetime="<%= short.expire_at.in_time_zone.to_datetime %>">-</time></td>
           <td><%= button_to t(".actions.delete"), short_path(short), method: :delete, data: { turbo_confirm: t(".actions.messages.confirm_delete") } %></td>
         </tr>
       <% end %>

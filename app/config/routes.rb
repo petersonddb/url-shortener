@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   scope module: :shortener do
     resources :shorts, only: %i[index create destroy]
   end
+
+  get "r/:token", to: "redirection/short_link_redirection#redirect", as: "short_link_redirection"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
