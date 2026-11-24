@@ -30,7 +30,7 @@ class Shortener::CreateShortForm
   private
 
   def set_defaults
-    @short.expire_at = Time.zone.today + 1.year
+    @short.expire_at = Date.current + 1.year
   end
 
   def allocate_token

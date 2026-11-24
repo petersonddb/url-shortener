@@ -14,7 +14,7 @@ class Shortener::ShortsController < ApplicationController
     else
       @shorts = Shortener::Short.all
 
-      render(:index, status: :unprocessable_entity)
+      render(:index, status: :unprocessable_content)
     end
   rescue Shortener::CreateShortForm::TokenUnavailable => error
     Rails.logger.error(error.message)

@@ -20,7 +20,7 @@ RSpec.describe Shortener::CreateShortForm do
         expect(saved).to be(true)
         expect(repository).to have_received(:allocate).once
         expect(Shortener::Short.last.token).to eq("ABC123")
-        expect(Shortener::Short.last.expire_at).to eq(Time.zone.today + 1.year)
+        expect(Shortener::Short.last.expire_at).to eq(Date.current + 1.year)
       end
     end
 

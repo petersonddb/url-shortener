@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Shorts Pages", type: :request do
+RSpec.describe "Shortener Shorts Page", type: :request do
   describe "GET /shorts" do
     subject(:make_request) { get("/shorts", headers: headers) }
 
@@ -79,7 +79,7 @@ RSpec.describe "Shorts Pages", type: :request do
       it "indicates validation errors" do
         make_request
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
         expect(response.content_type).to match(/html/i)
         expect(response.body).to include("original URL is required")
       end
@@ -91,7 +91,7 @@ RSpec.describe "Shorts Pages", type: :request do
       it "indicates validation errors" do
         make_request
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
         expect(response.content_type).to match(/html/i)
         expect(response.body).to include("original URL is invalid")
       end
