@@ -1,4 +1,16 @@
 services:
+  # TODO: use NO-SQL database for shorts
+  # app-db:
+  #   image: mongodb/mongodb-community-server:6.0-ubi8
+  #   ports:
+  #     - "27017:27017"
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: example
+  #   volumes:
+  #     - app-db-data:/data/db
+  #   restart: unless-stopped
+
   app-db:
     image: postgres:18.1-bookworm
     ports:
