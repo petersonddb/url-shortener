@@ -31,7 +31,7 @@ gem "solid_cable"
 # For token management
 gem "sidekiq", "~> 8.1"
 gem "sidekiq-cron", "~> 2.4"
-gem "redis", "~> 5.4"
+gem "redis", "~> 6.1"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
