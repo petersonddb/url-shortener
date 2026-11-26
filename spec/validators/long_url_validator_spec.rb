@@ -24,7 +24,7 @@ RSpec.describe LongUrlValidator, type: :model do
       "https://www.example.com/path",
       "//example.com/long-path"
     ].each do |candidate_url|
-      context "given a possibly long url #{candidate_url}" do
+      context "with a possibly long url #{candidate_url}" do
         before { model.url = candidate_url }
 
         it "does not contain errors" do
@@ -41,7 +41,7 @@ RSpec.describe LongUrlValidator, type: :model do
       "www.example.com/long-path", # no scheme, no host
       "/example/long-path" # no scheme, no host
     ].each do |candidate_url|
-      context "given NOT a possibly long url #{candidate_url}" do
+      context "with a NOT possibly long url #{candidate_url}" do
         before { model.url = candidate_url }
 
         it "contains errors" do

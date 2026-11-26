@@ -21,10 +21,7 @@ RSpec.describe "Shortener Shorts Page", type: :request do
 
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to match(/html/i)
-        expect(response.body).to include(
-          "https://test.example.com/long",
-          "https://test.example.com/very-long"
-        )
+        expect(response.body).to include("https://test.example.com/long", "https://test.example.com/very-long")
       end
     end
   end
@@ -47,8 +44,7 @@ RSpec.describe "Shortener Shorts Page", type: :request do
         follow_redirect!
 
         expect(response.content_type).to match(/html/i)
-        expect(response.body).to include("https://test.example.com/new-long")
-        expect(response.body).to include("ABC123")
+        expect(response.body).to include("https://test.example.com/new-long", "ABC123")
       end
     end
 

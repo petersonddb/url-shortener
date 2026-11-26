@@ -4,22 +4,22 @@ RSpec.describe Shortener::Short, type: :model do
   include ActiveSupport::Testing::TimeHelpers
 
   describe "validations" do
-    it { should validate_presence_of(:token) }
-    it { should validate_presence_of(:original_url) }
-    it { should validate_presence_of(:expire_at) }
-    it { should validate_length_of(:token).is_equal_to(6) }
+    it { is_expected.to validate_presence_of(:token) }
+    it { is_expected.to validate_presence_of(:original_url) }
+    it { is_expected.to validate_presence_of(:expire_at) }
+    it { is_expected.to validate_length_of(:token).is_equal_to(6) }
   end
 
   describe "validations sensible to other attributes" do
     subject(:short) do
-      Shortener::Short.new(
+      described_class.new(
         token: "aToken",
         original_url: "https://test.example.com/long",
         expire_at: Date.current + 1.day
       )
     end
 
-    it { should validate_uniqueness_of(:token) }
+    it { is_expected.to validate_uniqueness_of(:token) }
   end
 
   describe "#expired?" do
@@ -36,38 +36,38 @@ RSpec.describe Shortener::Short, type: :model do
 
     context "with a short expired today" do
       let(:short) do
-        Shortener::Short.create!(
+        described_class.create!(
           original_url: "https://test.example.com/long",
           token: "ABC123",
           expire_at: Date.new(2026, 1, 2)
         )
       end
 
-      it { should be_truthy }
+      it { is_expected.to be_truthy }
     end
 
     context "with an expired short" do
       let(:short) do
-        Shortener::Short.create!(
+        described_class.create!(
           original_url: "https://test.example.com/long",
           token: "ABC123",
           expire_at: Date.new(2026, 1, 1)
         )
       end
 
-      it { should be_truthy }
+      it { is_expected.to be_truthy }
     end
 
     context "with a not expired short" do
       let(:short) do
-        Shortener::Short.create!(
+        described_class.create!(
           original_url: "https://test.example.com/long",
           token: "ABC123",
           expire_at: Date.new(2026, 1, 3)
         )
       end
 
-      it { should be_falsey }
+      it { is_expected.to be_falsey }
     end
   end
 end

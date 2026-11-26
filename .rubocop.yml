@@ -1,8 +1,17 @@
 # Omakase Ruby styling for Rails
 inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
-# Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
-#   Enabled: false
+plugins: 
+  - rubocop-rspec
+  - rubocop-rake
+
+AllCops:
+  NewCops: enable
+
+# Multiple expects in the same example is a performance optimization
+RSpec/MultipleExpectations:
+  Enabled: false
+
+# We must allow dependency injection, just ensure duck type
+RSpec/VerifiedDoubles:
+  Enabled: false
