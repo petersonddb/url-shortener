@@ -1,16 +1,5 @@
 services:
-  resources-cleaner-messaging-broker:
-    image: rabbitmq:4.1-management # includes web UI
-    ports:
-      - "5672:5672"
-      - "15672:15672" # Web UI
-    environment:
-      RABBITMQ_DEFAULT_USER: admin
-      RABBITMQ_DEFAULT_PASS: admin
-    volumes:
-      - resources-cleaner-messaging-broker-data:/var/lib/rabbitmq
-    restart: unless-stopped
-
+  # TODO: use NO-SQL database for shorts
   # app-db:
   #   image: mongodb/mongodb-community-server:6.0-ubi8
   #   ports:
@@ -33,48 +22,16 @@ services:
       - app-db-data:/var/lib/postgresql
     restart: unless-stopped
 
-  keys-db:
+  token-repository:
     image: valkey/valkey:8.1.1 # for open-source Redis
     ports:
       - "6379:6379"
     environment:
       VALKEY_EXTRA_FLAGS: "--appendonly yes --appendfsync everysec" # optimized for consistency, avoid duplicates
     volumes:
-      - keys-db-data:/data
+      - token-repository-data:/data
     restart: unless-stopped
-
-  keys-db-test:
-    image: valkey/valkey:8.1.1 # for open-source Redis
-    ports:
-      - "6380:6379"
-    environment:
-      VALKEY_EXTRA_FLAGS: "--save ''" # optimized for testing, data will always be flushed by tests
-    restart: unless-stopped
-
-  keygen-service-local:
-    depends_on:
-      - keys-db
-    build:
-      context: keygen-service
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    environment:
-      VALKEY_DATABASE_HOST: keys-db
-
-  service-local:
-    depends_on:
-      - keygen-service-local
-      - app-db
-    build:
-      context: url-shortening-service/packages/url-shortening-service
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    env_file:
-      - url-shortening-service/packages/url-shortening-service/.env.docker
 
 volumes:
-  resources-cleaner-messaging-broker-data:
   app-db-data:
-  keys-db-data:
+  token-repository-data:

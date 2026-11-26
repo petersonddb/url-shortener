@@ -1,5 +1,0 @@
-dist
-
-.env
-.env.docker
-.env.test
