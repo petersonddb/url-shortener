@@ -1,0 +1,17 @@
+# Omakase Ruby styling for Rails
+inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+
+plugins: 
+  - rubocop-rspec
+  - rubocop-rake
+
+AllCops:
+  NewCops: enable
+
+# Multiple expects in the same example is a performance optimization
+RSpec/MultipleExpectations:
+  Enabled: false
+
+# We must allow dependency injection, just ensure duck type
+RSpec/VerifiedDoubles:
+  Enabled: false

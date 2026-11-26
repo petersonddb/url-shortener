@@ -1,0 +1,28 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Redirect",
+      "warning_code": 18,
+      "fingerprint": "08218f1ed8010578589391b156d88354e195f406b22d3c30d4f532e70b0e4fc1",
+      "check_name": "Redirect",
+      "message": "Possible unprotected redirect",
+      "file": "app/controllers/redirection/short_link_redirection_controller.rb",
+      "line": 9,
+      "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
+      "code": "redirect_to(Shortener::Short.find_by!(:token => params[:token]).original_url, :allow_other_host => true)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Redirection::ShortLinkRedirectionController",
+        "method": "redirect"
+      },
+      "user_input": "Shortener::Short.find_by!(:token => params[:token]).original_url",
+      "confidence": "Weak",
+      "cwe_id": [
+        601
+      ],
+      "note": "Short links are meant to be redirected to arbitrary original URLs; any validations should be applied at the time of short create."
+    }
+  ],
+  "brakeman_version": "8.1.1"
+}
