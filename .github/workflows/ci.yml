@@ -40,7 +40,7 @@ jobs:
           bundler-cache: true
 
       - name: Run Linter
-        run: bin/rubocop -f github
+        run: bin/rubocop -f c
 
   test:
     runs-on: ubuntu-24.04
