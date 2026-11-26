@@ -69,5 +69,5 @@ end
 
 group :test do
   # Use for DRY tests, e.g. validations
-  gem "shoulda-matchers", "~> 6.0"
+  gem "shoulda-matchers", "~> 8.0"
 end
